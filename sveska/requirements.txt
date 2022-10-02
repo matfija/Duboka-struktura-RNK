@@ -1,0 +1,2 @@
+git+https://github.com/DasLab/draw_rna>=0.1
+matplotlib>=3.5.3

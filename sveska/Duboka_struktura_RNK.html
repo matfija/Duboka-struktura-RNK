@@ -13113,6 +13113,7 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <ol>
 <li><a href="#par:strukt">Struktura <em>RNK</em></a></li>
+<li><a href="#par:baza">Skup <em>RNAStralign</em></a></li>
 </ol>
 
 </div>
@@ -13220,6 +13221,137 @@ div#notebook {
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="2.-Skup-RNAStralign-%E2%AE%AD">2. Skup <em>RNAStralign</em> <a href="#par:toc">&#11181;</a><a id="par:baza" /><a class="anchor-link" href="#2.-Skup-RNAStralign-%E2%AE%AD">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Manjak podataka o <em>RNK</em> dugo je pravio problem pri radu sa njima. Početkom 21. veka bilo je poznato tek nekoliko hiljada različitih sekvenci, kao i znatno manje struktura. Poslednjih godina, međutim, eksperimentalno je <a href="https://en.wikipedia.org/wiki/Nucleic_acid_structure_determination">utvrđen</a> način uvijanja velikog broja novootkrivenih <a href="https://en.wikipedia.org/wiki/Non-coding_RNA">nekodirajućih</a> ribonukleinskih kiselina.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Trenutno najpoznatija baza <em>RNK</em> sa pridruženim strukturama jeste skup podataka <em>RNAStralign</em>, objavljen 2017. godine u okviru rada <a href="https://pubmed.ncbi.nlm.nih.gov/29036420/"><em>TurboFold II: RNA structural alignment and secondary structure prediction informed by multiple homologs</em></a>. Ovaj skup sadrži $37.149$ struktura iz osam različitih familija <em>RNK</em> − <a href="https://en.wikipedia.org/wiki/16S_ribosomal_RNA"><em>16S</em></a> ribozomalne, <a href="https://en.wikipedia.org/wiki/5S_ribosomal_RNA"><em>5S</em></a> ribozomalne, <a href="https://en.wikipedia.org/wiki/Group_I_catalytic_intron">katalitički introni</a> (<em>Group I Intron</em>), <a href="https://en.wikipedia.org/wiki/Ribonuclease_P">ribonukleaze</a> (<em>RNaseP</em>), <a href="https://en.wikipedia.org/wiki/Signal_recognition_particle_RNA">signalne</a> (<em>SRP</em>), <a href="https://en.wikipedia.org/wiki/Telomerase">telomeraze</a>, <a href="https://en.wikipedia.org/wiki/Transfer-messenger_RNA">transportno-informacione</a> (<em>tmRNA</em>), <a href="https://en.wikipedia.org/wiki/Transfer_RNA">transportne</a> (<em>tRNA</em>) − čija dužina varira od nekoliko desetina do skoro dve hiljade nukleobaza. Dužina, struktura i familija inače su u tesnoj vezi.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Skup <em>RNAStralign</em> sadrži identifikator sekvence, samu sekvencu, njenu familiju, kao i strukturu u obliku niza uparivanja, pri čemu indeks $j$ kao $i$-ti element niza svedoči o postojanju uparivanja $(i, j)$. Ukoliko postoji uparivanje $(i, j)$ postoji i obrnuto $(j, i)$ koje je isto. U slučaju $i = j$, baza je neuparena. Iako vrlo koristan, ovaj skup sadrži redundantne podatke. Postoje, naime, suštinski ponovljene strukture, budući da se ista ili slična <em>RNK</em> pojavljuje u više organizama. Zbog toga se pristupa uklanjanju redundantnosti kao vidu čišćenja podataka, nakon čega ostaje $30.451$ instanci. Na ovaj način dobija se <a href="https://en.wikipedia.org/wiki/Benchmark_%28computing%29">standardni</a> (<em>benchmark</em>) skup, uveden u radu <a href="https://arxiv.org/abs/2002.05810"><em>RNA Secondary Structure Prediction By Learning Unrolled Algorithms</em></a> (<em>E2Efold</em>) iz 2020, a koji se koristi za upoređivanje različitih pristupa.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Dodatnim zanemarivanjem nepotpunih sekvenci, čija struktura nije precizno određena, dobija se konačan broj od $28.473$ slogova. Pomenuti rad preporučuje <a href="https://en.wikipedia.org/wiki/Training,_validation,_and_test_data_sets">podelu</a> na skupove za obučavanje (trening), proveru (test) i validaciju u približnom odnosu $80\%−10\%−10\%$, i to <a href="https://en.wikipedia.org/wiki/Stratified_sampling">stratifikovanu</a> prema familiji. Štaviše, oni su dostupni kao tri datoteke u formatu zapetom razdvojenih vrednosti, pa se u nastavku sveske koriste kao <code>train.csv</code>, <code>test.csv</code> i <code>valid.csv</code>. Sledi implementacija klase koja enkapsulira <em>RNK</em> sekvencu sa pridruženim identifikatorom, familijom, strukturom i može da je nacrta, kao i učitavanje podataka.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Biblioteka za crtanje</span>
+<span class="kn">from</span> <span class="nn">ipynb.draw</span> <span class="kn">import</span> <span class="n">draw_struct</span>
+
+<span class="c1"># Biblioteka za vizuelizacije</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Klasa koja predstavlja RNK</span>
+<span class="k">class</span> <span class="nc">RNK</span><span class="p">:</span>
+    <span class="c1"># Konstrukcija objekta prema podacima</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identifikator</span><span class="p">,</span> <span class="n">sekvenca</span><span class="p">,</span> <span class="n">familija</span><span class="p">,</span> <span class="o">*</span><span class="n">uparivanje</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">identifikator</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sekvenca</span> <span class="o">=</span> <span class="n">sekvenca</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">familija</span> <span class="o">=</span> <span class="n">familija</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uparivanje</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">uparivanje</span><span class="p">)]</span>
+        
+        <span class="c1"># Inicijalizacija strukture</span>
+        <span class="n">struktura</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sekvenca</span><span class="p">)</span> <span class="o">*</span> <span class="p">[</span><span class="s1">'.'</span><span class="p">]</span>
+        
+        <span class="c1"># Popunjavanje strukture uparivanjima</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uparivanje</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">:</span>
+                <span class="n">struktura</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'('</span>
+                <span class="n">struktura</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="s1">')'</span>
+        
+        <span class="c1"># Spajanje strukture u jednu nisku</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">struktura</span> <span class="o">=</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">struktura</span><span class="p">)</span>
+    
+    <span class="c1"># Crtanje enkapsulirane sekundarne strukture</span>
+    <span class="k">def</span> <span class="nf">_ipython_display_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">draw_struct</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sekvenca</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">struktura</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">())</span>
+        
+        <span class="c1"># Dodavanje naslova ilustraciji</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1"> [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">familija</span><span class="si">}</span><span class="s1">]'</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sekvenca</span><span class="p">,</span>
+                             <span class="bp">self</span><span class="o">.</span><span class="n">struktura</span><span class="p">]),</span> <span class="n">fontdict</span><span class="o">=</span><span class="p">{</span><span class="s1">'family'</span><span class="p">:</span> <span class="s1">'monospace'</span><span class="p">})</span>
+        
+        <span class="c1"># Sređivanje grafikona</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Učitavanje podataka iz datoteke</span>
+<span class="k">def</span> <span class="nf">učitaj</span><span class="p">(</span><span class="n">datoteka</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">datoteka</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">RNK</span><span class="p">(</span><span class="o">*</span><span class="n">l</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">','</span><span class="p">))</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Učitavanje skupova sa diska</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">učitaj</span><span class="p">(</span><span class="s1">'../podaci/train.csv'</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">učitaj</span><span class="p">(</span><span class="s1">'../podaci/test.csv'</span><span class="p">)</span>
+<span class="n">valid</span> <span class="o">=</span> <span class="n">učitaj</span><span class="p">(</span><span class="s1">'../podaci/valid.csv'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
 </div>
     </div>
   </div>

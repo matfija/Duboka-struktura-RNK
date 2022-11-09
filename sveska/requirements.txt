@@ -1,10 +1,10 @@
 git+https://github.com/DasLab/draw_rna>=0.1
 matplotlib>=3.5.3
-more-itertools>=8.14.0
-networkx>=2.8.7
+more-itertools>=9.0.0
+networkx>=2.8.8
 nltk>=3.7
-pandas>=1.4.4
+pandas>=1.5.1
 svgling>=0.3.1
-torch>=1.12.1
+torch>=1.12.0
 torchinfo>=1.7.1
-tqdm>=4.64.1
+tqdm>=4.62.3

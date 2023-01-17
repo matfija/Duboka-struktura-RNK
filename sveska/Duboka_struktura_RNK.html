@@ -14071,7 +14071,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Kontekstno slobodne gramatike odlikuje ograničenje da je leva strana pravila ($\alpha$) strogo jedan neterminal, dok je desna ($\beta$) proizvoljan niz simbola. Stohastičke gramatike dodatno svakom pravilu izvođenja pridružuju verovatnoću, i to dobro definisanu, tako da je pokriven ceo prostor događaja, odnosno da se verovatnoća svih mogućih izvođenja iz jednog neterminala sumira u jedinicu. Ispostavlja se da stohastičke ili <a href="https://en.wikipedia.org/wiki/Probabilistic_context-free_grammar">probabilističke kontekstno slobodne gramatike</a> (<em>PCFG</em>), koja objedinjuju ove dve odlike, predstavljaju dobar statistički model jezika sa ugnežđenim zavisnostima, a takav je upravo razmatrani jezik <em>RNK</em>.</p>
+<p>Kontekstno slobodne gramatike odlikuje ograničenje da je leva strana pravila ($\alpha$) strogo jedan neterminal, dok je desna ($\beta$) proizvoljan niz simbola. Stohastičke gramatike dodatno svakom pravilu izvođenja pridružuju verovatnoću, i to dobro definisanu, tako da je pokriven ceo prostor događaja, odnosno da se verovatnoća svih mogućih izvođenja iz jednog neterminala sumira u jedinicu. Ispostavlja se da stohastičke ili <a href="https://en.wikipedia.org/wiki/Probabilistic_context-free_grammar">probabilističke kontekstno slobodne gramatike</a> (<em>PCFG</em>), koje objedinjuju ove dve odlike, predstavljaju dobar statistički model jezika sa ugnežđenim zavisnostima, a takav je upravo razmatrani jezik <em>RNK</em>.</p>
 
 </div>
 </div>
@@ -14298,7 +14298,7 @@ $$ \large S → LS \scriptsize\text{ (nizanje elemenata) } \large| L \scriptsize
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>U nastavku je implementirana klasa koja enkapsulira gramatiku <em>KH-99</em>, nakon čega je gramatika obučena, a njena pravila izvođena prikazana. Kako gramatike nemaju podesivih hiperparametara, odmah je formiran finalni model, što znači da je obučavanje sprovedeno nad objedinjenim skupom za trening i validaciju. Uvidom u obučenu gramatiku, odnosno njenih $19$ parametara, moguće je izvesti različite zaključke. Primera radi, može se primetiti da je ubedljivo najčešće uparivanje $G-C$, za koje je poznato da je termodinamički najstabilnije. Na drugom mestu je obrnuti par $C-G$, dok je dva do tri puta manje parova $A-U$ i $U-A$. Postoji i određen nezanemarljiv broj nekanonskih parova $U-G$ i $G-U$. Takođe, u petljama su primetno češće baze $A$ i $U$, dok su $G$ i $C$ uparenije.</p>
+<p>U nastavku je implementirana klasa koja enkapsulira gramatiku <em>KH-99</em>, nakon čega je gramatika obučena, a njena pravila izvođenja prikazana. Kako gramatike nemaju podesivih hiperparametara, odmah je formiran finalni model, što znači da je obučavanje sprovedeno nad objedinjenim skupom za trening i validaciju. Uvidom u obučenu gramatiku, odnosno njenih $19$ parametara, moguće je izvesti različite zaključke. Primera radi, može se primetiti da je ubedljivo najčešće uparivanje $G-C$, za koje je poznato da je termodinamički najstabilnije. Na drugom mestu je obrnuti par $C-G$, dok je dva do tri puta manje parova $A-U$ i $U-A$. Postoji i određen nezanemarljiv broj nekanonskih parova $U-G$ i $G-U$. Takođe, u petljama su primetno češće baze $A$ i $U$, dok su $G$ i $C$ uparenije.</p>
 
 </div>
 </div>
@@ -15611,7 +15611,7 @@ $$ \large S → LS \scriptsize\text{ (nizanje elemenata) } \large| L \scriptsize
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Kako je formirana matrica strukture, tako se formira i trodimenzioni <a href="https://en.wikipedia.org/wiki/Tensor">tenzor</a> kao nova reprezentacija sekvence. Radi lakšeg razumevanja pristupa, pogodno je i ovde govoriti u terminima <a href="https://en.wikipedia.org/wiki/Square_matrix">kvadratne matrice</a>. Ćelija $(i, j)$ shvata se kao mogućnost uparivanja baze $i$ i $j$ na osnovu poznavanja domena. Tako vrednosti od $0$ do $5$ redom predstavljaju parove $A-U$, $U-A$, $U-G$, $G-U$, $G-C$, $C-G$. Ova matrica, dakle, nije doslovno simetrična, iako suštinski jeste. Vrednost $6$ rezervisana je za neuparene baze, odnosno slučaj $i = j$, dok vrednost $7$ označava nedozvoljena uparivanja, bilo zbog prirode potencijalnog para, bilo zbog toga što su baze previše bliske. Drugi slučaj, podsećanja radi, pokriva motiv <a href="https://en.wikipedia.org/wiki/Stem-loop">ukosnice sa drškom</a>, za koju je u uvodu napomenuto da sadrži najmanje tri baze i da je to ograničenje neophodno ugraditi u računarske metode. U nastavku je prikazana stilizovana matrica malog primera <em>tRNK</em>. Za kraj, ostaje napomena da se umesto matrice konvolutivnoj mreži daje tenzor, koji se dobija <a href="https://en.wikipedia.org/wiki/One-hot">enkodiranjem</a> navedenih vrednosti, npr. <code>[0 0 1 0 0 0 0 0]</code> umesto indeksa <code>2</code>.</p>
+<p>Kako je formirana matrica strukture, tako se formira i trodimenzioni <a href="https://en.wikipedia.org/wiki/Tensor">tenzor</a> kao nova reprezentacija sekvence. Radi lakšeg razumevanja pristupa, pogodno je i ovde govoriti u terminima <a href="https://en.wikipedia.org/wiki/Square_matrix">kvadratne matrice</a>. Ćelija $(i, j)$ shvata se kao mogućnost uparivanja baza $i$ i $j$ na osnovu poznavanja domena. Tako vrednosti od $0$ do $5$ redom predstavljaju parove $A-U$, $U-A$, $U-G$, $G-U$, $G-C$, $C-G$. Ova matrica, dakle, nije doslovno simetrična, iako suštinski jeste. Vrednost $6$ rezervisana je za neuparene baze, odnosno slučaj $i = j$, dok vrednost $7$ označava nedozvoljena uparivanja, bilo zbog prirode potencijalnog para, bilo zbog toga što su baze previše bliske. Drugi slučaj, podsećanja radi, pokriva motiv <a href="https://en.wikipedia.org/wiki/Stem-loop">ukosnice sa drškom</a>, za koju je u uvodu napomenuto da sadrži najmanje tri baze i da je to ograničenje neophodno ugraditi u računarske metode. U nastavku je prikazana stilizovana matrica malog primera <em>tRNK</em>. Za kraj, ostaje napomena da se umesto matrice konvolutivnoj mreži daje tenzor, koji se dobija <a href="https://en.wikipedia.org/wiki/One-hot">enkodiranjem</a> navedenih vrednosti, npr. <code>[0 0 1 0 0 0 0 0]</code> umesto indeksa <code>2</code>.</p>
 
 </div>
 </div>
@@ -17072,7 +17072,7 @@ $$ \large S → LS \scriptsize\text{ (nizanje elemenata) } \large| L \scriptsize
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ulaz</span><span class="p">,</span> <span class="n">izlaz</span><span class="p">,</span> <span class="n">preskok</span><span class="p">,</span>
                  <span class="n">kernel</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="c1"># Inicijalizacija PyTorch modula</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Blok</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         
         <span class="c1"># Čuvanje podatka o preskoku</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">preskok</span> <span class="o">=</span> <span class="n">preskok</span>
@@ -17145,7 +17145,7 @@ $$ \large S → LS \scriptsize\text{ (nizanje elemenata) } \large| L \scriptsize
     <span class="c1"># Konstrukcija konvolutivne mreže</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">ulaz</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">izlaz</span><span class="o">=</span><span class="mi">32</span><span class="p">):</span>
         <span class="c1"># Inicijalizacija PyTorch modula</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">CNN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         
         <span class="c1"># Pamćenje veličina blokova</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">=</span> <span class="n">M</span><span class="p">,</span> <span class="n">N</span>
@@ -17639,7 +17639,7 @@ Estimated Total Size (MB): 639.75
     <span class="c1"># Direktorijum za modele</span>
     <span class="n">cnn</span><span class="o">.</span><span class="n">folder</span> <span class="o">=</span> <span class="n">folder</span>
     
-    <span class="c1"># Pravljenje direktorija za modele</span>
+    <span class="c1"># Pravljenje direktorijuma za modele</span>
     <span class="n">napravi_folder</span><span class="p">(</span><span class="n">cnn</span><span class="o">.</span><span class="n">folder</span><span class="p">)</span>
     
     <span class="c1"># Ime modela (klase) malim slovima</span>
@@ -17810,10 +17810,10 @@ Estimated Total Size (MB): 639.75
     <span class="c1"># Raspon epoha</span>
     <span class="n">raspon</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">epoha</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
     
-    <span class="c1"># Srednja greške na skupu za obuku</span>
+    <span class="c1"># Srednje greške na skupu za obuku</span>
     <span class="n">greške_train</span> <span class="o">=</span> <span class="p">[]</span>
     
-    <span class="c1"># Srednja greške pri validaciji</span>
+    <span class="c1"># Srednje greške pri validaciji</span>
     <span class="n">greške_valid</span> <span class="o">=</span> <span class="p">[]</span>
     
     <span class="c1"># Iteracija kroz epohe</span>
@@ -19146,7 +19146,7 @@ $$ \text{odziv} = \frac{|\text{tačno predviđena}|}{|\text{tačna}|} \; \; \; \
                     <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prop</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">rnk</span><span class="p">,</span> <span class="n">prop</span><span class="p">))</span>
 
                 <span class="c1"># Predviđena struktura sa ispravkom</span>
-                <span class="c1"># ako ispada da su susedi upareni</span>
+                <span class="c1"># ako ispadne da su susedi upareni</span>
                 <span class="n">predikcija</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">niska</span><span class="p">(</span><span class="n">rnk</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;()&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">)</span>
                 
                 <span class="c1"># Pamćenje predviđene strukture</span>
@@ -19175,7 +19175,7 @@ $$ \text{odziv} = \frac{|\text{tačno predviđena}|}{|\text{tačna}|} \; \; \; \
     
     <span class="c1"># Evaluacija uspeha gramatika</span>
     <span class="k">def</span> <span class="nf">mere</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ime</span><span class="p">):</span>
-        <span class="c1"># Izvlačenje zamapćene predikcije</span>
+        <span class="c1"># Izvlačenje zapamćene predikcije</span>
         <span class="n">predikcija</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">ime</span><span class="si">}</span><span class="s1">_pred&#39;</span><span class="p">)</span>
         
         <span class="c1"># Određivanje mera kvaliteta</span>
@@ -19635,7 +19635,7 @@ $$ \text{odziv} = \frac{|\text{tačno predviđena}|}{|\text{tačna}|} \; \; \; \
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Četvrto poglavlje posvećeno je evaluaciji modela. Navedeni su načini na koji se od izlaza modela dobija konačna konkretna i korektna sekundarna struktura, nakon čega su opisane mere kvaliteta modela, odnosno način upoređivanja predviđene strukture sa stvarnom. Sva predviđanja i izračunate mere sačuvani su na disku, ali i grafički prikazani, kako bi se mogli uporediti. Očekivano, <em>CNN</em> postiže veći uspeh od <em>PCFG</em>. Mreža, ipak, uči znatno više parametara, pa njeno obučavanje i traje duže. Složenost predviđanja u oba slučajeva je kubna u odnosu na dužinu sekvence, što je posledica arhitekture modela. Gramatika pritom parsira samu sekvencu, dok mreža operiše sa kvadratnom matricom mogućnosti uparivanja. Možda glavna prednost neuronske mreže jeste što istovremeno predviđa i neugnežđene interakcije (pseudočvorove), koje zadiru u više nivoe strukturne organizacije <em>RNK</em>, a gramatika isključivo ugnežđena uparivanja.</p>
+<p>Četvrto poglavlje posvećeno je evaluaciji modela. Navedeni su načini na koji se od izlaza modela dobija konačna konkretna i korektna sekundarna struktura, nakon čega su opisane mere kvaliteta modela, odnosno način upoređivanja predviđene strukture sa stvarnom. Sva predviđanja i izračunate mere sačuvani su na disku, ali i grafički prikazani, kako bi se mogli uporediti. Očekivano, <em>CNN</em> postiže veći uspeh od <em>PCFG</em>. Mreža, ipak, uči znatno više parametara, pa njeno obučavanje i traje duže. Složenost predviđanja je u oba slučaja kubna u odnosu na dužinu sekvence, što je posledica arhitekture modela. Gramatika pritom parsira samu sekvencu, dok mreža operiše sa kvadratnom matricom mogućnosti uparivanja. Možda glavna prednost neuronske mreže jeste što istovremeno predviđa i neugnežđene interakcije (pseudočvorove), koje zadiru u više nivoe strukturne organizacije <em>RNK</em>, a gramatika isključivo ugnežđena uparivanja.</p>
 
 </div>
 </div>
